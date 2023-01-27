@@ -1,0 +1,10 @@
+parte 1: https://youtu.be/1tRLveSyNz8 (progetto senza mongodb)
+parte 2: https://www.youtube.com/watch?v=VELru-FCWDM (connessione al cluster da shell/compass)
+
+download shell MongDB: https://downloads.mongodb.com/compass/mongosh-1.6.2-win32-x64.zip
+comando connessione shell-cluster mongodb atlas (da usare nella cartella bin della shell, da powershell):
+./mongosh.exe "mongodb+srv://cluster0.htz5o5w.mongodb.net/Prova" --username admin
+
+mat-button example: https://stackblitz.com/edit/angular-xzbxx4?file=app%2Fbutton-types-example.html
+
+https://code.tutsplus.com/it/tutorials/creating-a-blogging-app-using-angular-mongodb-home--cms-30129
