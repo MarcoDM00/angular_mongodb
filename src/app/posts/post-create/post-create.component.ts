@@ -10,12 +10,24 @@ import { PostsService } from "../posts.service";
 export class PostCreateComponent {
     inputTitle = ''
     inputContent = "";
+    img:string = '';
 
-    constructor(public postsService: PostsService) {}
+    constructor(private postsService: PostsService) {}
+
+    readImg(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        var classe = this;
+        reader.onload = function (e) {
+            classe.img = e.target.result.toString();
+        };
+        reader.readAsDataURL(file);
+    }
 
     onAddPost(form: NgForm) {
         if (form.invalid) return;
-        this.postsService.addPost(form.value.title, form.value.content);
+        this.postsService.addPost(form.value.title, form.value.content, this.img);
         form.resetForm();
+        this.img = '';
     }
 }

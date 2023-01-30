@@ -24,6 +24,15 @@
              placeholder="Post Content"></textarea>
             <mat-error *ngIf="content.invalid">Inserire contenuto</mat-error>
         </mat-form-field>
+        <input #file [hidden]="true" type="file" (change)="readImg($event)" accept="image/*"/>
+        <button mat-flat-button color="primary" (click)="$event.preventDefault();file.click()">Carica immagine</button>
+        <div [hidden]="this.img == ''">
+            <h5>Anteprima immagine</h5>
+            <img [src]="this.img" alt="img" width="30%" height="30%">
+        </div>
+        <br>
+        <br>
+        <br>
         <button
          mat-raised-button
          color="warn"

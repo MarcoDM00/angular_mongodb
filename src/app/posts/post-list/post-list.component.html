@@ -1,12 +1,14 @@
 <mat-accordion multi="true" *ngIf="posts.length > 0">
     <mat-expansion-panel *ngFor="let p of posts">
         <mat-expansion-panel-header>
-            {{p.title}}
+            Autore: {{p.title}}
         </mat-expansion-panel-header>
+        <h4>Testo post</h4>
         <p>{{p.content}}</p>
+        <img [src]="p.img" alt="img" [hidden]="p.img == ''">
         <mat-action-row>
-            <button mat-button color="primary">Edit</button>
-            <button mat-button color="warn">Delete</button>
+            <button mat-button color="primary">Like</button>
+            <button mat-button color="warn" (click)="this.posts.pop(p.id)">Delete</button>
         </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>
