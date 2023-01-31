@@ -1,6 +1,6 @@
-import json, socket
-import pymongo as pym
+import socket
 from bson.objectid import ObjectId
+import pymongo as pym
 
 from flask_cors import CORS
 from flask import Flask, request
@@ -10,21 +10,23 @@ cors = CORS(app)
 client = pym.MongoClient("mongodb+srv://admin:admin@cluster0.htz5o5w.mongodb.net/?retryWrites=true&w=majority")
 db = client['Prova']
 collection = db['provina']
-print(list(collection.find()))
 
 def getData():
     lista = []
     for a in collection.find():
-        id = a.pop("_id")
+        a["_id"] = str(a["_id"])
         lista.append(a)
-        print(lista)
     return lista
+
+def insertPost(post):
+    id = collection.insert_one(post)
+    return str(id.inserted_id)
 
 def cancelladb():
     collection.delete_many({})
 
-def insertPost(post):
-    collection.insert_one(post)
+def delete(id):
+   collection.delete_one({"_id": ObjectId(id)})
  
 @app.route('/index',methods = ['GET'])
 def index():
@@ -32,10 +34,9 @@ def index():
 
 @app.route('/add',methods = ['POST'])
 def add_post():
-  data = request.get_json()
   try:
+    data = request.get_json()
     post = {
-      "id": data["id"],
       "title": data["title"],
       "content": data["content"],
       "like": data['like'],
@@ -43,13 +44,22 @@ def add_post():
       'img' : data['img'],
       'commenti': data['commenti']
     }
-    insertPost(post)
-    return {"esito": "OK"}    
+    id = insertPost(post)
+    return {"esito": "OK add", "id": id}
   except Exception as e:
     print(e)
-    return {"esito": "Errore"}
+    return {"esito": "Errore add"}
 
-
+@app.route('/delete', methods = ['POST'])
+def delete_post():
+  try:
+   data = request.get_json()
+   id = data['id']
+   delete(id)
+   return {"esito": "OK delete"}
+  except Exception as e:
+   print(e)
+   return {"esito": "Errore delete"}
 
 cancelladb()
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

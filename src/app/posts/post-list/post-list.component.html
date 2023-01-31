@@ -1,5 +1,5 @@
 <mat-accordion multi="true" *ngIf="posts.length > 0">
-    <mat-expansion-panel *ngFor="let p of posts">
+    <mat-expansion-panel *ngFor="let p of posts; let i = index">
         <mat-expansion-panel-header>
             Autore: {{p.title}}
         </mat-expansion-panel-header>
@@ -7,8 +7,8 @@
         <p>{{p.content}}</p>
         <img [src]="p.img" alt="img" [hidden]="p.img == ''">
         <mat-action-row>
-            <button mat-button color="primary">Like</button>
-            <button mat-button color="warn" (click)="this.posts.pop(p.id)">Delete</button>
+            <button mat-button color="primary" (click)="print(i)">Like</button>
+            <button mat-button color="warn" (click)="this.onDeletePost(i); this.posts.pop(i);">Delete</button>
         </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>
