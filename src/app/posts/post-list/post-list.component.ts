@@ -25,7 +25,6 @@ export class PostListComponent implements OnInit {
   update(i: number) {
     if (this.updateInfos == null) {
       this.updateInfos = setTimeout(() => {
-        console.log("chiamata update")
         var p = this.posts[i];
         this.postsService.update(p.id, p.like, p.dislike, p.commenti);
         this.updateInfos = null;
