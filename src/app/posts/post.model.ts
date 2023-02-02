@@ -21,6 +21,14 @@ export class Post {
         this.id = id;
     }
 
+    addLike() {
+        this.like++;
+    }
+
+    addDislike() {
+        this.dislike++;
+    }
+
     toJSON() {
         return {
             "id": this.id,

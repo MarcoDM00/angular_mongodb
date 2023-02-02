@@ -37,4 +37,10 @@ export class PostsService {
             console.log(res);
         });
     }
+
+    update(id: string, like: number, dislike: number, commenti: string[]) {
+        this.http.post("http://192.168.1.63:8080/update", {id, like, dislike, commenti}).subscribe((res) => {
+            console.log(res);
+        });
+    }
 }

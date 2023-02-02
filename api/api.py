@@ -27,6 +27,13 @@ def cancelladb():
 
 def delete(id):
    collection.delete_one({"_id": ObjectId(id)})
+
+def update(post):
+   collection.update_one({"_id": ObjectId(post['id'])}, {"$set": {
+      "like": post['like'],
+      "dislike": post['dislike'],
+      "commenti": post['commenti'],
+   }})
  
 @app.route('/index',methods = ['GET'])
 def index():
@@ -60,6 +67,22 @@ def delete_post():
   except Exception as e:
    print(e)
    return {"esito": "Errore delete"}
+  
+@app.route('/update', methods = ['POST'])
+def update_post():
+   try:
+      data = request.get_json()
+      post = {
+        "id": data['id'],
+        "like": data['like'],
+        "dislike": data['dislike'],
+        'commenti': data['commenti']
+      }
+      update(post)
+      return {"esito": "OK update"}
+   except Exception as e:
+      print(e)
+      return {"esito": "Errore update"}
 
 cancelladb()
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

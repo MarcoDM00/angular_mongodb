@@ -7,8 +7,9 @@
         <p>{{p.content}}</p>
         <img [src]="p.img" alt="img" [hidden]="p.img == ''">
         <mat-action-row>
-            <button mat-button color="primary">Like</button>
-            <button mat-button color="warn" (click)="this.onDeletePost(i);">Delete</button>
+            <button mat-button color="primary" (click)="p.addLike(); update(i);">{{p.like}} Likes</button>
+            <button mat-button color="warn" (click)="p.addDislike(); update(i);">{{p.dislike}} Dislikes</button>
+            <button mat-button (click)="this.onDeletePost(i);">Delete</button>
         </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>
