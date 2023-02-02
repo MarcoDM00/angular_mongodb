@@ -18,6 +18,7 @@ export class PostsService {
                     p['_id']
                 ));
             }
+            console.log("OK get");
         });
         return this.posts;
     }

@@ -2,8 +2,8 @@ export class Post {
     id: string;
     title: string;
     content: string;
-    like?: number;
-    dislike?: number;
+    like: number;
+    dislike: number;
     img: string;
     commenti?: string[];
 
