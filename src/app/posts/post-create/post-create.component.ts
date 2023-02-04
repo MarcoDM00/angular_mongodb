@@ -8,8 +8,6 @@ import { PostsService } from "../posts.service";
     styleUrls: ['./post-create.component.css']
 })
 export class PostCreateComponent {
-    inputTitle = ''
-    inputContent = "";
     img:string = '';
 
     constructor(private postsService: PostsService) {}

@@ -11,7 +11,7 @@ export class PostListComponent implements OnInit {
   posts:Post[] = [];
   updateInfos;
 
-  constructor(public postsService: PostsService) {}
+  constructor(private postsService: PostsService) {}
 
   ngOnInit(): void {
     this.posts = this.postsService.getPosts();
@@ -22,7 +22,7 @@ export class PostListComponent implements OnInit {
     this.posts.splice(i, 1);
   }
 
-  update(i: number) {
+  onUpdatePost(i: number) {
     if (this.updateInfos == null) {
       this.updateInfos = setTimeout(() => {
         var p = this.posts[i];
