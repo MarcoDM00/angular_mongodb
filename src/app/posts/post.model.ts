@@ -5,9 +5,9 @@ export class Post {
     like: number;
     dislike: number;
     img: string;
-    commenti?: string[];
+    commenti?: {user:string, text:string}[];
 
-    constructor(title: string, content: string, img:string, id?: string, like?: number, dislike?: number, commenti?: string[]) {
+    constructor(title: string, content: string, img:string, id?: string, like?: number, dislike?: number, commenti?: {user:string, text:string}[]) {
         this.id = id || "";
         this.title = title;
         this.content = content;

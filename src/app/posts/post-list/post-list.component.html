@@ -3,7 +3,6 @@
         <mat-expansion-panel-header>
             Autore: {{p.title}}
         </mat-expansion-panel-header>
-        <h4>Testo post</h4>
         <p>{{p.content}}</p>
         <img [src]="p.img" alt="img" [hidden]="p.img == ''">
         <mat-action-row>
@@ -12,6 +11,8 @@
             <button mat-button>Edit</button>
             <button mat-button (click)="onDeletePost(i);">Delete</button>
         </mat-action-row>
+        <hr>
+        <app-commenti [p]="p"></app-commenti>
     </mat-expansion-panel>
 </mat-accordion>
-<p class="info-text mat-body-1" *ngIf="posts.length <= 0">No posts yet</p>
+<p class="info-text mat-body-1" *ngIf="posts.length == 0">No posts yet</p>

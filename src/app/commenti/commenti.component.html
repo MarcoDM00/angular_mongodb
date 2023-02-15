@@ -1,0 +1,45 @@
+<mat-card class="mat-elevation-z5" style="margin-top: 15px; border-left: 1px solid black;" *ngFor="let c of p.commenti">
+    <mat-card-header>
+        <mat-card-title>{{c.user}}</mat-card-title>
+        </mat-card-header>
+    <mat-card-content>
+        <p>{{c.text}}</p>
+    </mat-card-content>
+</mat-card>
+<button mat-button style="background-color: #a1f9b5aa;" (click)="nascondiCommenta = !nascondiCommenta">
+    <p *ngIf="nascondiCommenta">Premi per commentare</p>
+    <p *ngIf="!nascondiCommenta">Premi per nascondere</p>
+</button>
+<div [hidden]="nascondiCommenta">
+    <mat-card style="padding: 15px; margin: auto; width: 40%;">
+        <form (submit)="addCommento(autore.value, testo.value)">
+            <mat-form-field>
+                <input
+                matInput
+                type="text"
+                name="autore"
+                #autore
+                required
+                minlength="3"
+                placeholder="Autore Commento">
+                <mat-error *ngIf="autore.invalid">Inserire autore (min. 3 lettere)</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <textarea
+                matInput
+                rows="6"
+                name="testo"
+                #testo
+                ngModel
+                #postInput
+                required
+                placeholder="Contenuto Commento"></textarea>
+                <mat-error *ngIf="testo.invalid">Inserire contenuto</mat-error>
+            </mat-form-field>
+            <button
+            mat-raised-button
+            color="primary"
+            type="sumbit">Salva commento</button>
+        </form>
+    </mat-card>
+</div>

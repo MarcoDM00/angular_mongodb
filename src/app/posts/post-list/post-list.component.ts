@@ -9,12 +9,13 @@ import { PostsService } from '../posts.service';
 })
 export class PostListComponent implements OnInit {
   posts:Post[] = [];
-  updateInfos;
+  updateInfos = null;
 
   constructor(private postsService: PostsService) {}
 
   ngOnInit(): void {
     this.posts = this.postsService.getPosts();
+    
   }
 
   onDeletePost(i: number) {

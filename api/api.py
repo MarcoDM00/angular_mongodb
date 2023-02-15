@@ -22,6 +22,14 @@ def insertPost(post):
     id = collection.insert_one(post)
     return str(id.inserted_id)
 
+def insertComment(commento):
+   id = commento['id']
+   print(id)
+   user = commento['user']
+   print(user)
+   text = commento['text']
+   print(text)
+
 def cancelladb():
     collection.delete_many({})
 
@@ -56,6 +64,21 @@ def add_post():
   except Exception as e:
     print(e)
     return {"esito": "Errore add"}
+  
+@app.route('/commenta',methods = ['POST'])
+def add_comment():
+  try:
+    data = request.get_json()
+    commento = {
+      "id": data["id"],
+      "user": data["user"],
+      "text": data["text"]
+    }
+    insertComment(commento)
+    return {"esito": "OK add commento"}
+  except Exception as e:
+    print(e)
+    return {"esito": "Errore add commento"}
 
 @app.route('/delete', methods = ['POST'])
 def delete_post():
